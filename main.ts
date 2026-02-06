@@ -61,7 +61,7 @@ enum pwm_led_r {
 //% color="#AA278D"
 namespace MiniCar {
     const DRIVE_SPEED = 180
-    const ROTATE_90_TIME_MS = 350
+    const ROTATE_90_TIME_MS = 305
     const ACTION_TIME_MS = 1000
 
     function stopAllMotors() {
