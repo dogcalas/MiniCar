@@ -58,7 +58,7 @@ enum pwm_led_r {
     pwm_blue_l = 0x05,
 }
 
-//% color="#AA278D"
+//% color="#AA278D" groups=['CarKit Control', 'CarKit Dev', 'Motor', 'RGB LED', 'Ultrasonic Sensor', 'Photoresistance Sensor', 'Line Tracking', 'Servo', 'others']
 namespace MiniCar {
     const DRIVE_SPEED = 180
     const ROTATE_SPEED = 140
@@ -105,24 +105,28 @@ namespace MiniCar {
     }
 
     //% block="⬆ avanzar 1s"
+    //% subcategory="CarKit Control"
     //% group="CarKit Control" weight=100
     export function arrowForward() {
         driveForOneSecond(Direction1.Forward, Direction1.Forward)
     }
 
     //% block="⬇ retroceder 1s"
+    //% subcategory="CarKit Control"
     //% group="CarKit Control" weight=99
     export function arrowBackward() {
         driveForOneSecond(Direction1.Backward, Direction1.Backward)
     }
 
     //% block="⬅ girar izquierda 90°"
+    //% subcategory="CarKit Control"
     //% group="CarKit Control" weight=98
     export function arrowTurnLeft() {
         rotateInPlaceForMs(Direction1.Backward, Direction1.Forward, ROTATE_90_LEFT_MS)
     }
 
     //% block="➡ girar derecha 90°"
+    //% subcategory="CarKit Control"
     //% group="CarKit Control" weight=97
     export function arrowTurnRight() {
         rotateInPlaceForMs(Direction1.Forward, Direction1.Backward, ROTATE_90_RIGHT_MS)
@@ -130,6 +134,7 @@ namespace MiniCar {
 
     //% block="⬅ girar izquierda ms $durationMs"
     //% durationMs.min=0 durationMs.max=3000 durationMs.defl=300
+    //% subcategory="CarKit Dev"
     //% group="CarKit Dev" weight=20
     export function arrowTurnLeftMs(durationMs: number) {
         rotateInPlaceForMs(Direction1.Backward, Direction1.Forward, durationMs)
@@ -137,6 +142,7 @@ namespace MiniCar {
 
     //% block="➡ girar derecha ms $durationMs"
     //% durationMs.min=0 durationMs.max=3000 durationMs.defl=300
+    //% subcategory="CarKit Dev"
     //% group="CarKit Dev" weight=19
     export function arrowTurnRightMs(durationMs: number) {
         rotateInPlaceForMs(Direction1.Forward, Direction1.Backward, durationMs)
@@ -144,6 +150,7 @@ namespace MiniCar {
 
     //% block="⬆ avanzar $seconds s"
     //% seconds.min=0 seconds.max=10 seconds.defl=1
+    //% subcategory="CarKit Dev"
     //% group="CarKit Dev" weight=18
     export function arrowForwardSeconds(seconds: number) {
         driveForMs(Direction1.Forward, Direction1.Forward, Math.round(seconds * 1000))
@@ -151,6 +158,7 @@ namespace MiniCar {
 
     //% block="⬇ retroceder $seconds s"
     //% seconds.min=0 seconds.max=10 seconds.defl=1
+    //% subcategory="CarKit Dev"
     //% group="CarKit Dev" weight=17
     export function arrowBackwardSeconds(seconds: number) {
         driveForMs(Direction1.Backward, Direction1.Backward, Math.round(seconds * 1000))

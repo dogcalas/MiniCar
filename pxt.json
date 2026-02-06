@@ -1,6 +1,6 @@
 {
     "name": "Mini Car",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "KEYESTUDIO Microbit Smart Robot Car with Building Blocks",
     "dependencies": {
         "core": "*",
