@@ -62,8 +62,8 @@ enum pwm_led_r {
 namespace MiniCar {
     const DRIVE_SPEED = 180
     const ROTATE_SPEED = 140
-    const ROTATE_90_LEFT_MS = 230
-    const ROTATE_90_RIGHT_MS = 230
+    const ROTATE_90_LEFT_MS = 276
+    const ROTATE_90_RIGHT_MS = 276
     const ROTATE_BRAKE_SPEED = 100
     const ROTATE_BRAKE_MS = 40
     const ACTION_TIME_MS = 1000
