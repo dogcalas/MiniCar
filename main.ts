@@ -61,7 +61,11 @@ enum pwm_led_r {
 //% color="#AA278D"
 namespace MiniCar {
     const DRIVE_SPEED = 180
-    const ROTATE_90_TIME_MS = 280
+    const ROTATE_SPEED = 140
+    const ROTATE_90_LEFT_MS = 230
+    const ROTATE_90_RIGHT_MS = 230
+    const ROTATE_BRAKE_SPEED = 100
+    const ROTATE_BRAKE_MS = 40
     const ACTION_TIME_MS = 1000
 
     function stopAllMotors() {
@@ -78,10 +82,19 @@ namespace MiniCar {
         stopAllMotors()
     }
 
-    function rotate90InPlace(leftDirection: Direction1, rightDirection: Direction1) {
-        motor(Motorlist.M1, leftDirection, DRIVE_SPEED)
-        motor(Motorlist.M2, rightDirection, DRIVE_SPEED)
-        basic.pause(ROTATE_90_TIME_MS)
+    function oppositeDirection(direction: Direction1): Direction1 {
+        if (direction == Direction1.Forward) return Direction1.Backward
+        return Direction1.Forward
+    }
+
+    function rotateInPlaceForMs(leftDirection: Direction1, rightDirection: Direction1, durationMs: number) {
+        motor(Motorlist.M1, leftDirection, ROTATE_SPEED)
+        motor(Motorlist.M2, rightDirection, ROTATE_SPEED)
+        basic.pause(durationMs)
+        // Brief reverse pulse to reduce overshoot caused by inertia.
+        motor(Motorlist.M1, oppositeDirection(leftDirection), ROTATE_BRAKE_SPEED)
+        motor(Motorlist.M2, oppositeDirection(rightDirection), ROTATE_BRAKE_SPEED)
+        basic.pause(ROTATE_BRAKE_MS)
         stopAllMotors()
     }
 
@@ -100,13 +113,13 @@ namespace MiniCar {
     //% block="⬅ girar izquierda 90°"
     //% group="CarKit Control" weight=98
     export function arrowTurnLeft() {
-        rotate90InPlace(Direction1.Backward, Direction1.Forward)
+        rotateInPlaceForMs(Direction1.Backward, Direction1.Forward, ROTATE_90_LEFT_MS)
     }
 
     //% block="➡ girar derecha 90°"
     //% group="CarKit Control" weight=97
     export function arrowTurnRight() {
-        rotate90InPlace(Direction1.Forward, Direction1.Backward)
+        rotateInPlaceForMs(Direction1.Forward, Direction1.Backward, ROTATE_90_RIGHT_MS)
     }
 
     //% block="motor = | %motor Direction = | $direction speed = $pwmvalue"
