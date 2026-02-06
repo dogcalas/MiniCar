@@ -62,8 +62,8 @@ enum pwm_led_r {
 namespace MiniCar {
     const DRIVE_SPEED = 180
     const ROTATE_SPEED = 140
-    const ROTATE_90_LEFT_MS = 210
-    const ROTATE_90_RIGHT_MS = 210
+    const ROTATE_90_LEFT_MS = 300
+    const ROTATE_90_RIGHT_MS = 300
     const ROTATE_BRAKE_SPEED = 100
     const ROTATE_BRAKE_MS = 40
     const ACTION_TIME_MS = 1000
@@ -76,9 +76,14 @@ namespace MiniCar {
     }
 
     function driveForOneSecond(leftDirection: Direction1, rightDirection: Direction1) {
+        driveForMs(leftDirection, rightDirection, ACTION_TIME_MS)
+    }
+
+    function driveForMs(leftDirection: Direction1, rightDirection: Direction1, durationMs: number) {
+        if (durationMs < 0) durationMs = 0
         motor(Motorlist.M1, leftDirection, DRIVE_SPEED)
         motor(Motorlist.M2, rightDirection, DRIVE_SPEED)
-        basic.pause(ACTION_TIME_MS)
+        basic.pause(durationMs)
         stopAllMotors()
     }
 
@@ -124,17 +129,31 @@ namespace MiniCar {
     }
 
     //% block="⬅ girar izquierda ms $durationMs"
-    //% durationMs.min=0 durationMs.max=3000 durationMs.defl=210
-    //% group="CarKit Control" weight=96
+    //% durationMs.min=0 durationMs.max=3000 durationMs.defl=300
+    //% group="CarKit Dev" weight=20
     export function arrowTurnLeftMs(durationMs: number) {
         rotateInPlaceForMs(Direction1.Backward, Direction1.Forward, durationMs)
     }
 
     //% block="➡ girar derecha ms $durationMs"
-    //% durationMs.min=0 durationMs.max=3000 durationMs.defl=210
-    //% group="CarKit Control" weight=95
+    //% durationMs.min=0 durationMs.max=3000 durationMs.defl=300
+    //% group="CarKit Dev" weight=19
     export function arrowTurnRightMs(durationMs: number) {
         rotateInPlaceForMs(Direction1.Forward, Direction1.Backward, durationMs)
+    }
+
+    //% block="⬆ avanzar $seconds s"
+    //% seconds.min=0 seconds.max=10 seconds.defl=1
+    //% group="CarKit Dev" weight=18
+    export function arrowForwardSeconds(seconds: number) {
+        driveForMs(Direction1.Forward, Direction1.Forward, Math.round(seconds * 1000))
+    }
+
+    //% block="⬇ retroceder $seconds s"
+    //% seconds.min=0 seconds.max=10 seconds.defl=1
+    //% group="CarKit Dev" weight=17
+    export function arrowBackwardSeconds(seconds: number) {
+        driveForMs(Direction1.Backward, Direction1.Backward, Math.round(seconds * 1000))
     }
 
     //% block="motor = | %motor Direction = | $direction speed = $pwmvalue"
