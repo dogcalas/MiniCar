@@ -60,6 +60,54 @@ enum pwm_led_r {
 
 //% color="#AA278D"
 namespace MiniCar {
+    const DRIVE_SPEED = 180
+    const ROTATE_90_TIME_MS = 350
+    const ACTION_TIME_MS = 1000
+
+    function stopAllMotors() {
+        motor_i2cWrite(0x01, 0)
+        motor_i2cWrite(0x02, 0)
+        motor_i2cWrite(0x03, 0)
+        motor_i2cWrite(0x04, 0)
+    }
+
+    function driveForOneSecond(leftDirection: Direction1, rightDirection: Direction1) {
+        motor(Motorlist.M1, leftDirection, DRIVE_SPEED)
+        motor(Motorlist.M2, rightDirection, DRIVE_SPEED)
+        basic.pause(ACTION_TIME_MS)
+        stopAllMotors()
+    }
+
+    function rotate90InPlace(leftDirection: Direction1, rightDirection: Direction1) {
+        motor(Motorlist.M1, leftDirection, DRIVE_SPEED)
+        motor(Motorlist.M2, rightDirection, DRIVE_SPEED)
+        basic.pause(ROTATE_90_TIME_MS)
+        stopAllMotors()
+    }
+
+    //% block="⬆ avanzar 1s"
+    //% group="CarKit Control" weight=100
+    export function arrowForward() {
+        driveForOneSecond(Direction1.Forward, Direction1.Forward)
+    }
+
+    //% block="⬇ retroceder 1s"
+    //% group="CarKit Control" weight=99
+    export function arrowBackward() {
+        driveForOneSecond(Direction1.Backward, Direction1.Backward)
+    }
+
+    //% block="⬅ girar izquierda 90°"
+    //% group="CarKit Control" weight=98
+    export function arrowTurnLeft() {
+        rotate90InPlace(Direction1.Backward, Direction1.Forward)
+    }
+
+    //% block="➡ girar derecha 90°"
+    //% group="CarKit Control" weight=97
+    export function arrowTurnRight() {
+        rotate90InPlace(Direction1.Forward, Direction1.Backward)
+    }
 
     //% block="motor = | %motor Direction = | $direction speed = $pwmvalue"
     //% pwmvalue.min=0 pwmvalue.max=255 
