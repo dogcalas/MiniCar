@@ -61,8 +61,8 @@ enum pwm_led_r {
 //% color="#AA278D" groups=['Motor', 'RGB LED', 'Ultrasonic Sensor', 'Photoresistance Sensor', 'Line Tracking', 'Servo', 'others']
 namespace MiniCar {
     const DRIVE_SPEED = 180
-    const DRIVE_SPEED_LEFT_ADJUST = 5  // Ajusta este valor si deriva a la izquierda (+5 a +20)
-    const DRIVE_SPEED_RIGHT_ADJUST = 0 // Ajusta este valor si deriva a la derecha
+    const DRIVE_SPEED_LEFT_ADJUST = 0  // Ajusta este valor si deriva a la izquierda (+5 a +20)
+    const DRIVE_SPEED_RIGHT_ADJUST = 10 // Ajusta este valor si deriva a la derecha
     const ROTATE_SPEED = 140
     const ROTATE_BRAKE_SPEED = 100
     const ROTATE_BRAKE_MS = 40
@@ -324,13 +324,13 @@ namespace MiniCarControl {
     const ROTATE_90_LEFT_MS = 300
     const ROTATE_90_RIGHT_MS = 300
 
-    //% block="⬆ avanzar 1"
+    //% block="⬆️ avanzar 1"
     //% weight=100
     export function arrowForward() {
         MiniCar.driveForMs(Direction1.Forward, Direction1.Forward, ACTION_TIME_MS)
     }
 
-    //% block="⬇ retroceder 1"
+    //% block="⬇️ retroceder 1"
     //% weight=99
     export function arrowBackward() {
         MiniCar.driveForMs(Direction1.Backward, Direction1.Backward, ACTION_TIME_MS)
