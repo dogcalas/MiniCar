@@ -61,6 +61,8 @@ enum pwm_led_r {
 //% color="#AA278D" groups=['Motor', 'RGB LED', 'Ultrasonic Sensor', 'Photoresistance Sensor', 'Line Tracking', 'Servo', 'others']
 namespace MiniCar {
     const DRIVE_SPEED = 180
+    const DRIVE_SPEED_LEFT_ADJUST = 5  // Ajusta este valor si deriva a la izquierda (+5 a +20)
+    const DRIVE_SPEED_RIGHT_ADJUST = 0 // Ajusta este valor si deriva a la derecha
     const ROTATE_SPEED = 140
     const ROTATE_BRAKE_SPEED = 100
     const ROTATE_BRAKE_MS = 40
@@ -75,8 +77,8 @@ namespace MiniCar {
     //% blockHidden=true
     export function driveForMs(leftDirection: Direction1, rightDirection: Direction1, durationMs: number) {
         if (durationMs < 0) durationMs = 0
-        motor(Motorlist.M1, leftDirection, DRIVE_SPEED)
-        motor(Motorlist.M2, rightDirection, DRIVE_SPEED)
+        motor(Motorlist.M1, leftDirection, DRIVE_SPEED + DRIVE_SPEED_LEFT_ADJUST)
+        motor(Motorlist.M2, rightDirection, DRIVE_SPEED + DRIVE_SPEED_RIGHT_ADJUST)
         basic.pause(durationMs)
         stopAllMotors()
     }
@@ -316,31 +318,31 @@ namespace MiniCar {
     }
 }
 
-//% color="#2D89EF" icon="\uf0e4" block="CarKit Control"
+//% color="#2D89EF" icon="\uf0ad" block="CarKit Control"
 namespace MiniCarControl {
-    const ACTION_TIME_MS = 1000
+    const ACTION_TIME_MS = 500
     const ROTATE_90_LEFT_MS = 300
     const ROTATE_90_RIGHT_MS = 300
 
-    //% block="⬆ avanzar 1s"
+    //% block="⬆ avanzar 1"
     //% weight=100
     export function arrowForward() {
         MiniCar.driveForMs(Direction1.Forward, Direction1.Forward, ACTION_TIME_MS)
     }
 
-    //% block="⬇ retroceder 1s"
+    //% block="⬇ retroceder 1"
     //% weight=99
     export function arrowBackward() {
         MiniCar.driveForMs(Direction1.Backward, Direction1.Backward, ACTION_TIME_MS)
     }
 
-    //% block="⬅ girar izquierda 90°"
+    //% block="⬅️ girar izquierda 90°"
     //% weight=98
     export function arrowTurnLeft() {
         MiniCar.rotateInPlaceForMs(Direction1.Backward, Direction1.Forward, ROTATE_90_LEFT_MS)
     }
 
-    //% block="➡ girar derecha 90°"
+    //% block="➡️ girar derecha 90°"
     //% weight=97
     export function arrowTurnRight() {
         MiniCar.rotateInPlaceForMs(Direction1.Forward, Direction1.Backward, ROTATE_90_RIGHT_MS)
