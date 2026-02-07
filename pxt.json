@@ -1,7 +1,7 @@
 {
     "name": "Mini Car",
-    "version": "0.0.1",
-    "description": "KEYESTUDIO Microbit Smart Robot Car with Building Blocks",
+    "version": "0.0.3",
+    "description": "MakeCode extension for KEYESTUDIO MiniCar with CarKit Control and CarKit Dev blocks",
     "dependencies": {
         "core": "*",
         "pxt-ir-remote": "github:mworkfun/pxt-ir-remote#c10e5f2cfb043511430dbefb1b56a02f9e7ed175",

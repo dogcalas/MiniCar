@@ -58,7 +58,7 @@ enum pwm_led_r {
     pwm_blue_l = 0x05,
 }
 
-//% color="#AA278D" groups=['CarKit Control', 'CarKit Dev', 'Motor', 'RGB LED', 'Ultrasonic Sensor', 'Photoresistance Sensor', 'Line Tracking', 'Servo', 'others']
+//% color="#AA278D" groups=['CarKit Control', 'Motor', 'RGB LED', 'Ultrasonic Sensor', 'Photoresistance Sensor', 'Line Tracking', 'Servo', 'others']
 namespace MiniCar {
     const DRIVE_SPEED = 180
     const ROTATE_SPEED = 140
@@ -79,7 +79,8 @@ namespace MiniCar {
         driveForMs(leftDirection, rightDirection, ACTION_TIME_MS)
     }
 
-    function driveForMs(leftDirection: Direction1, rightDirection: Direction1, durationMs: number) {
+    //% blockHidden=true
+    export function driveForMs(leftDirection: Direction1, rightDirection: Direction1, durationMs: number) {
         if (durationMs < 0) durationMs = 0
         motor(Motorlist.M1, leftDirection, DRIVE_SPEED)
         motor(Motorlist.M2, rightDirection, DRIVE_SPEED)
@@ -92,7 +93,8 @@ namespace MiniCar {
         return Direction1.Forward
     }
 
-    function rotateInPlaceForMs(leftDirection: Direction1, rightDirection: Direction1, durationMs: number) {
+    //% blockHidden=true
+    export function rotateInPlaceForMs(leftDirection: Direction1, rightDirection: Direction1, durationMs: number) {
         if (durationMs < 0) durationMs = 0
         motor(Motorlist.M1, leftDirection, ROTATE_SPEED)
         motor(Motorlist.M2, rightDirection, ROTATE_SPEED)
@@ -130,38 +132,6 @@ namespace MiniCar {
     //% group="CarKit Control" weight=97
     export function arrowTurnRight() {
         rotateInPlaceForMs(Direction1.Forward, Direction1.Backward, ROTATE_90_RIGHT_MS)
-    }
-
-    //% block="⬅ girar izquierda ms $durationMs"
-    //% durationMs.min=0 durationMs.max=3000 durationMs.defl=300
-    //% subcategory="CarKit Dev"
-    //% group="CarKit Dev" weight=20
-    export function arrowTurnLeftMs(durationMs: number) {
-        rotateInPlaceForMs(Direction1.Backward, Direction1.Forward, durationMs)
-    }
-
-    //% block="➡ girar derecha ms $durationMs"
-    //% durationMs.min=0 durationMs.max=3000 durationMs.defl=300
-    //% subcategory="CarKit Dev"
-    //% group="CarKit Dev" weight=19
-    export function arrowTurnRightMs(durationMs: number) {
-        rotateInPlaceForMs(Direction1.Forward, Direction1.Backward, durationMs)
-    }
-
-    //% block="⬆ avanzar $seconds s"
-    //% seconds.min=0 seconds.max=10 seconds.defl=1
-    //% subcategory="CarKit Dev"
-    //% group="CarKit Dev" weight=18
-    export function arrowForwardSeconds(seconds: number) {
-        driveForMs(Direction1.Forward, Direction1.Forward, Math.round(seconds * 1000))
-    }
-
-    //% block="⬇ retroceder $seconds s"
-    //% seconds.min=0 seconds.max=10 seconds.defl=1
-    //% subcategory="CarKit Dev"
-    //% group="CarKit Dev" weight=17
-    export function arrowBackwardSeconds(seconds: number) {
-        driveForMs(Direction1.Backward, Direction1.Backward, Math.round(seconds * 1000))
     }
 
     //% block="motor = | %motor Direction = | $direction speed = $pwmvalue"
@@ -378,6 +348,37 @@ namespace MiniCar {
     //% angle.min=0 angle.max.max=180
     export function setServo(angle: number): void {
         pins.servoWritePin(AnalogPin.P2, angle)
+    }
+}
+
+//% color="#5A8F29" icon="\uf0ad" block="CarKit Dev"
+namespace MiniCarDev {
+    //% block="⬅ girar izquierda ms $durationMs"
+    //% durationMs.min=0 durationMs.max=3000 durationMs.defl=300
+    //% weight=20
+    export function arrowTurnLeftMs(durationMs: number) {
+        MiniCar.rotateInPlaceForMs(Direction1.Backward, Direction1.Forward, durationMs)
+    }
+
+    //% block="➡ girar derecha ms $durationMs"
+    //% durationMs.min=0 durationMs.max=3000 durationMs.defl=300
+    //% weight=19
+    export function arrowTurnRightMs(durationMs: number) {
+        MiniCar.rotateInPlaceForMs(Direction1.Forward, Direction1.Backward, durationMs)
+    }
+
+    //% block="⬆ avanzar $seconds s"
+    //% seconds.min=0 seconds.max=10 seconds.defl=1
+    //% weight=18
+    export function arrowForwardSeconds(seconds: number) {
+        MiniCar.driveForMs(Direction1.Forward, Direction1.Forward, Math.round(seconds * 1000))
+    }
+
+    //% block="⬇ retroceder $seconds s"
+    //% seconds.min=0 seconds.max=10 seconds.defl=1
+    //% weight=17
+    export function arrowBackwardSeconds(seconds: number) {
+        MiniCar.driveForMs(Direction1.Backward, Direction1.Backward, Math.round(seconds * 1000))
     }
 }
 

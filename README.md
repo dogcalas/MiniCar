@@ -1,44 +1,45 @@
+# MiniCar Extension (MakeCode micro:bit)
 
-> 在 [https://github.com/keyestudio2019/MiniCar](https://github.com/keyestudio2019/MiniCar)打开此页面
-## 用作扩展
+Extension para controlar el carro MiniCar de KEYESTUDIO en MakeCode.
 
-此仓库可以作为 **插件** 添加到 MakeCode 中。
+## Instalar como extension
 
-* 打开 [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* 点击 **新项目**
-* 点击齿轮图标菜单下的 **扩展**
-* 搜索 **https://github.com/keyestudio2019/MiniCar** 并导入
+1. Abre [https://makecode.microbit.org/](https://makecode.microbit.org/)
+2. Crea un proyecto nuevo
+3. Ve a **Extensions**
+4. Importa la URL de este repositorio
 
-## 编辑此项目 ![构建状态标志](https://github.com/mworkfun/pxt-k-bit/workflows/MakeCode/badge.svg)
+## Categorias de bloques
 
-在 MakeCode 中编辑此仓库。
+- `CarKit Control`
+  - `avanzar 1s`
+  - `retroceder 1s`
+  - `girar izquierda 90°`
+  - `girar derecha 90°`
+- `CarKit Dev` (pruebas y calibracion)
+  - `girar izquierda ms`
+  - `girar derecha ms`
+  - `avanzar X s`
+  - `retroceder X s`
 
-* 打开 [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* 点击 **导入**，然后点击 **导入 URL**
-* 粘贴 **https://github.com/keyestudio2019/MiniCar** 并点击导入
+## Pines usados
 
-## 积木块预览
+- IR receiver: `P16`
+- Ultrasonic: `P14` (Trig), `P15` (Echo)
+- LDR izquierda: `P1`
+- LDR derecha: `P0`
+- Line tracking izquierda: `P12`
+- Line tracking derecha: `P13`
+- Servo: `P2`
 
-此图像显示主分支中最后一次提交的块代码。
-此图像可能需要几分钟才能刷新。
+## Vista previa de bloques
 
+<script src="https://makecode.com/gh-pages-embed.js"></script>
+<script>
+makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");
+</script>
 
+## Metadata
 
-#### 元数据 (用于搜索、渲染)
-
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
-
-#### tutorials
-
-IR receiver uses P16
-
-Ultrasonic uses P14(Trig) and P15(Echo)
-
-left photoresistance uses P1
-right photoresistance uses P0
-
-left check line sensor uses P12
-right check line sensor uses P13
-
+- for `PXT/microbit`
 
