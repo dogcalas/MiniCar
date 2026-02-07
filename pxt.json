@@ -1,6 +1,6 @@
 {
     "name": "Mini Car",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "MakeCode extension for KEYESTUDIO MiniCar with CarKit Control and CarKit Dev blocks",
     "dependencies": {
         "core": "*",
